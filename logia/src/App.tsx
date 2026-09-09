@@ -15,6 +15,7 @@ function App() {
       return;
     }
     if (key === "ENTER") {
+      setCurrentTry(() => {})
       return; 
     }
     if (currentGuess.length < 5) {
