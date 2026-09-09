@@ -14,7 +14,7 @@ export function Keyboard({ onKeyPress }: KeyboardProps) {
   const lastRows = [["ENTER", "W", "X", "C", "V", "B", "N", "<-"]];
 
   const icons: Record<string, string> = {
-    ENTER: enterIcon,
+    "ENTER": enterIcon,
     "<-": deleteIcon,
   };
 
