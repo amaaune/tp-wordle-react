@@ -9,7 +9,7 @@ export function Keyboard() {
     ];
 
     const lastRows = [
-        ["<-", "W", "X", "C", "V", "B", "N", "ENTER"]
+        ["ENTER", "W", "X", "C", "V", "B", "N","<-"]
     ];
 
     const icons: Record<string, string> = {
