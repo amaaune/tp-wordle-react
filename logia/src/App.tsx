@@ -36,10 +36,13 @@ function App() {
           throw new Error(`Statut de réponse : ${reponse.status}`);
         }
         const resultat = await reponse.json();
-        console.log(resultat);
         setTodayWord(resultat.word);
       } catch (erreur) {
-        console.error(erreur.message);
+        if (erreur instanceof Error) {
+          console.error(erreur.message);
+        } else {
+          console.error("Une erreur inconue est survenue", erreur);
+        }
       }
     }
     fetchAnswer();
