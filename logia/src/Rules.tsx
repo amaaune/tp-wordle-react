@@ -23,7 +23,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 }
 
 export function RulesButton() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>

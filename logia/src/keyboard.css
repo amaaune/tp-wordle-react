@@ -1,37 +1,37 @@
 button {
-    border: 1px solid #db1212;
-    border-radius: 4px;
-    background-color: #eee;
-    font-weight: bold;
-    cursor: pointer;
+  border: 1px solid #db1212;
+  border-radius: 4px;
+  background-color: #727070;
+  color: #b1aeae;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .keyboard-container {
-    height: 100vh;
+  height: 100vh;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    
-    align-items: center;
+  align-items: center;
 }
 
 .keyboard,
 .lastKeyboard {
-    border-spacing: 1px;
+  border-spacing: 1px;
 }
 
 .lastKeyboard {
-    margin-top: 1px;
+  margin-top: 1px;
 }
 
 .keyboard button,
 .lastKeyboard button {
-    width: 45px;
-    height: 45px;
+  width: 45px;
+  height: 45px;
 }
 
 .key-icon {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
