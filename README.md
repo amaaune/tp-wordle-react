@@ -49,7 +49,7 @@ Vérifiez que le fichier `.env.local` de `wordle-api` contient bien :
 
 ```
 API_KEY=votre_cle_api
-CLIENT_URL=http://localhost:4173
+CLIENT_URL=http://localhost:5173
 ```
 
 > `CLIENT_URL` doit correspondre à l'origine exacte utilisée par le front (attention à `localhost` vs `127.0.0.1`, qui sont considérés comme deux origines différentes par le navigateur).
@@ -63,7 +63,7 @@ cd tp-wordle-react/logia
 npm run dev
 ```
 
-Le jeu est accessible sur **http://localhost:4173**.
+Le jeu est accessible sur **http://localhost:5173**.
 
 ## Lancer un build de production
 
