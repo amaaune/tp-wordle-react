@@ -15,18 +15,22 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState("");
   const [result, setResult] = useState<string[]>([]);
   const [history, setHistory] = useState<Try[]>([]);
+  const [gameWin, setGameWin] = useState<boolean>(false);
 
   function handleKeyPress(key: string) {
+    if (gameWin === true || history.length > 5) {
+      return;
+    }
     if (key === "<-") {
       setCurrentGuess((prev) => prev.slice(0, -1));
       return;
     }
     if (key === "ENTER") {
       const valid = Validate(currentGuess, "CHIEN");
-      setResult(valid);
       setHistory([...history, { guess: currentGuess, result: valid }]);
+      setGameWin(valid.every((string) => string === "green"));
       setCurrentGuess("");
-      setResult([""]);
+      setResult([]);
       return;
     }
     if (currentGuess.length < 5) {

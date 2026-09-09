@@ -21,14 +21,16 @@ export function Grid({ currentGuess, result, history }: GridProps) {
           ))}
         </div>
       ))}
-      <div className={grid.row}>
-        {[0, 1, 2, 3, 4].map((i) => (
-          <div className={`${grid.case} ${grid[result[i]]}`} key={i}>
-            {letters[i] ?? ""}
-          </div>
-        ))}
-      </div>
-      {Array(5 - history.length)
+      {history.length < 6 && (
+        <div className={grid.row}>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div className={`${grid.case} ${grid[result[i]]}`} key={i}>
+              {letters[i] ?? ""}
+            </div>
+          ))}
+        </div>
+      )}
+      {Array(Math.max(5 - history.length, 0))
         .fill("")
         .map((_, i) => (
           <div className={grid.row} key={i}>
