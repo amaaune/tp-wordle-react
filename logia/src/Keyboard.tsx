@@ -1,3 +1,6 @@
+import enterIcon from "./enter.png";
+import deleteIcon from "./delete.png";
+
 export function Keyboard() {
 
     const rows = [
@@ -8,6 +11,11 @@ export function Keyboard() {
     const lastRows = [
         ["<-", "W", "X", "C", "V", "B", "N", "ENTER"]
     ];
+
+    const icons: Record<string, string> = {
+        "ENTER": enterIcon,
+        "<-": deleteIcon,
+    };
 
 return (
     <div className="keyboard-container">
@@ -32,7 +40,13 @@ return (
                     <tr key={i}>
                         {lastRow.map((letter) => (
                             <td key={letter}>
-                                <button>{letter}</button>
+                                <button>
+                                    {icons[letter] ? (
+                                        <img src={icons[letter]} alt={letter} className="key-icon" />
+                                    ) : (
+                                        letter
+                                    )}
+                                </button>
                             </td>
                         ))}
                     </tr>
