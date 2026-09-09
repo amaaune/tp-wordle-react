@@ -13,6 +13,7 @@ export interface Try {
 }
 
 const MAX_ATTEMPTS = 6;
+const Priority: Record<string, number> = { grey: 0, orange: 1, green: 2 };
 
 function App() {
   const [currentGuess, setCurrentGuess] = useState("");
@@ -47,6 +48,21 @@ function App() {
     }
     fetchAnswer();
   }, []);
+
+  const lettreColor: Record<string, string> = {};
+
+  history.forEach((etry) => {
+    for (let i = 0; i < 5; i++) {
+      const lettre = etry.guess[i].toUpperCase();
+      const color = etry.result[i];
+      if (
+        !lettreColor[lettre] ||
+        Priority[color] > Priority[lettreColor[lettre]]
+      ) {
+        lettreColor[lettre] = color;
+      }
+    }
+  });
 
   function handleKeyPress(key: string) {
     if (gameOver) return;
@@ -89,7 +105,7 @@ function App() {
       <RulesButton />
 
       <Grid currentGuess={currentGuess} result={result} history={history} />
-      <Keyboard onKeyPress={handleKeyPress} />
+      <Keyboard onKeyPress={handleKeyPress} lettreColor={lettreColor} />
 
       <Modal isOpen={showFail} onClose={() => setShowFail(false)}>
         <Results word={todayWord} success={false} />

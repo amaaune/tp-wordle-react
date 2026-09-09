@@ -1,11 +1,13 @@
 import enterIcon from "./enter.png";
 import deleteIcon from "./delete.png";
+import grid from "./grid.module.css";
 
 interface KeyboardProps {
   onKeyPress: (key: string) => void;
+  lettreColor: Record<string, string>;
 }
 
-export function Keyboard({ onKeyPress }: KeyboardProps) {
+export function Keyboard({ onKeyPress, lettreColor }: KeyboardProps) {
   const rows = [
     ["A", "Z", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["Q", "S", "D", "F", "G", "H", "J", "K", "L", "M"],
@@ -14,7 +16,7 @@ export function Keyboard({ onKeyPress }: KeyboardProps) {
   const lastRows = [["ENTER", "W", "X", "C", "V", "B", "N", "<-"]];
 
   const icons: Record<string, string> = {
-    "ENTER": enterIcon,
+    ENTER: enterIcon,
     "<-": deleteIcon,
   };
 
@@ -26,7 +28,12 @@ export function Keyboard({ onKeyPress }: KeyboardProps) {
             <tr key={i}>
               {row.map((letter) => (
                 <td key={letter}>
-                  <button onClick={() => onKeyPress(letter)}>{letter}</button>
+                  <button
+                    className={grid[lettreColor[letter]] ?? ""}
+                    onClick={() => onKeyPress(letter)}
+                  >
+                    {letter}
+                  </button>
                 </td>
               ))}
             </tr>
@@ -40,9 +47,16 @@ export function Keyboard({ onKeyPress }: KeyboardProps) {
             <tr key={i}>
               {lastRow.map((letter) => (
                 <td key={letter}>
-                  <button onClick={() => onKeyPress(letter)}>
+                  <button
+                    className={grid[lettreColor[letter]] ?? ""}
+                    onClick={() => onKeyPress(letter)}
+                  >
                     {icons[letter] ? (
-                      <img src={icons[letter]} alt={letter} className="key-icon" />
+                      <img
+                        src={icons[letter]}
+                        alt={letter}
+                        className="key-icon"
+                      />
                     ) : (
                       letter
                     )}

@@ -1,16 +1,18 @@
 interface ResultsProps {
-    word: string;
-    success: boolean;
+  word: string;
+  success: boolean;
 }
 
 export function Results({ word, success }: ResultsProps) {
-    return (
+  return (
     <div>
-        {success ? (
+      {success ? (
         <p>Bravo, tu as trouvé le mot !</p>
-        ) : (
-        <p>Dommage, le mot était : <strong>{word}</strong></p>
-        )}
+      ) : (
+        <p>
+          Dommage, le mot était : <strong>{word}</strong>
+        </p>
+      )}
     </div>
-    );
-}   
+  );
+}
