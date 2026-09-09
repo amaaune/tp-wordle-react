@@ -1,4 +1,7 @@
 export function Validate(guess: string, secret: string) {
+  guess = guess.toLowerCase();
+  secret = secret.toLowerCase();
+
   const result = [];
 
   for (let i = 0; i < 5; i++) {

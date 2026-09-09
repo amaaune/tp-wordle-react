@@ -3,13 +3,16 @@ import "./App.css";
 import { Grid } from "./Grid";
 import "./keyboard.css";
 import { Keyboard } from "./Keyboard";
-import { Modal } from "./Rules";
+import { Modal, RulesButton } from "./Rules";
 import { Validate } from "./Validate";
+import { Results } from "./Results";
 
 export interface Try {
   guess: string;
   result: string[];
 }
+
+const MAX_ATTEMPTS = 6;
 
 function App() {
   const [currentGuess, setCurrentGuess] = useState("");
@@ -17,6 +20,8 @@ function App() {
   const [history, setHistory] = useState<Try[]>([]);
   const [gameWin, setGameWin] = useState<boolean>(false);
   const [todayWord, setTodayWord] = useState<string>("");
+  const [showFail, setShowFail] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     async function fetchAnswer() {
@@ -41,21 +46,36 @@ function App() {
   }, []);
 
   function handleKeyPress(key: string) {
-    if (gameWin === true || history.length > 5) {
-      return;
-    }
+    if (gameOver) return;
+
     if (key === "<-") {
       setCurrentGuess((prev) => prev.slice(0, -1));
       return;
     }
+
     if (key === "ENTER") {
+      if (currentGuess.length < 5) return;
       const valid = Validate(currentGuess, todayWord);
-      setHistory([...history, { guess: currentGuess, result: valid }]);
-      setGameWin(valid.every((string) => string === "green"));
+      const newHistory = [...history, { guess: currentGuess, result: valid }];
+
+      setHistory(newHistory);
       setCurrentGuess("");
       setResult([]);
+
+      const won = valid.every((string) => string === "green");
+      const lost = !won && newHistory.length >= MAX_ATTEMPTS;
+
+      if (won) {
+        setGameOver(true);
+        setGameWin(true);
+      }
+      if (lost) {
+        setGameOver(true);
+        setShowFail(true);
+      }
       return;
     }
+
     if (currentGuess.length < 5) {
       setCurrentGuess((prev) => prev + key);
     }
@@ -63,8 +83,17 @@ function App() {
 
   return (
     <>
+      <RulesButton />
+
       <Grid currentGuess={currentGuess} result={result} history={history} />
       <Keyboard onKeyPress={handleKeyPress} />
+
+      <Modal isOpen={showFail} onClose={() => setShowFail(false)}>
+        <Results word={todayWord} success={false} />
+      </Modal>
+      <Modal isOpen={gameWin} onClose={() => setGameWin(false)}>
+        <Results word={todayWord} success={true} />
+      </Modal>
     </>
   );
 }
