@@ -7,7 +7,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0, 10px;
+  margin: 0 10px;
 }
 
 .case {
@@ -17,4 +17,21 @@
   margin: 4px;
   width: 62px;
   height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.grey {
+  background-color: grey;
+}
+
+.green {
+  background-color: green;
+}
+
+.orange {
+  background-color: rgb(226, 192, 38);
 }
